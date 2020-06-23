@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions.unitTests.includeAndroidResources = true
+}
+
+dependencies {
+    implementation project(":ui")
+
+    debugImplementation("androidx.fragment:fragment-testing:1.2.5") { because("we use FragmentScenario") }
+    implementation('androidx.test.espresso:espresso-contrib:3.2.0') { because("we use BoundedMatchers") }
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testImplementation 'junit:junit:4.13'
+    testImplementation "androidx.test:runner:1.2.0"
+    testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'org.robolectric:robolectric:4.3.1'
+}

@@ -1,0 +1,4 @@
+include ':ui:testing'
+include ':ui'
+include ':app'
+rootProject.name = "matchers"
